@@ -1,4 +1,9 @@
 package com.preguntation.repositories;
 
-public interface RankingRepository {
+import com.preguntation.models.ranking;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface RankingRepository extends CrudRepository<ranking, Long> {
 }

@@ -1,4 +1,9 @@
 package com.preguntation.repositories;
 
-public interface QuestionsRepository {
+import com.preguntation.models.question;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface QuestionsRepository extends CrudRepository<question, Long> {
 }
