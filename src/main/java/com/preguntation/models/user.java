@@ -16,23 +16,57 @@ public class user {
     @Column(nullable = false)
     private String username;
 
-    @NotBlank(message = "Must have score")
+    @NotBlank(message = "Must have email")
     @Column(nullable = false)
+    private String email;
+
+    @NotBlank(message = "Must have Password")
+    @Column(nullable = false)
+    private String password;
+
     private long score;
 
     public user(){}
 
+    public user(user copy){
+        id = copy.id;
+        username = copy.username;
+        score = copy.score;
+        email = copy.email;
+        password = copy.password;
+    }
+
     //pull from db
-    public user(long id, String username, long score) {
+    public user(long id, String username, long score, String email, String password) {
         this.id = id;
         this.username = username;
         this.score = score;
+        this.email = email;
+        this.password = password;
     }
 
     //insert into db
-    public user(String username, long score) {
+    public user(String username, long score, String email, String password) {
         this.username = username;
         this.score = score;
+        this.email = email;
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public long getId() {
