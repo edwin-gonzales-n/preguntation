@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="partials/navbar :: head('Profile')">
+    <script>
+        $('body').on('hidden', function () {
+            $(this).removeData('modal-content');
+        });
+    </script>
 </head>
 <body>
+<nav th:replace="partials/navbar :: navbar"></nav>
 
+<h1>This is your profile page</h1>
+
+<script th:replace="partials/navbar :: scripts"></script>
+<script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
+<script th:inline="javascript">
+    JsBarcode(".barcode").init();
+
+</script>
 </body>
 </html>

@@ -4,10 +4,16 @@ import com.preguntation.models.user;
 import com.preguntation.repositories.RankingRepository;
 import com.preguntation.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
+
 
 @Controller
 public class UsersController {
@@ -29,10 +35,19 @@ public class UsersController {
         return "index";
     }
 
-    @GetMapping("/register")
-    public String showSignupForm(Model model) {
-        model.addAttribute("user", new user());
-        return "/users/register";
+    @PostMapping("/register")
+    public ResponseEntity<?> signup(@Valid user user,
+                                    Errors validation,
+                                    Model model){
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        usersRepository.save(user);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Location", "/");
+    //        return ResponseEntity.ok().build();
+        if(validation.hasErrors())
+            model.addAttribute("errors", validation);
+        return new ResponseEntity<String>(headers,HttpStatus.FOUND);
     }
 
     @GetMapping("/profile")

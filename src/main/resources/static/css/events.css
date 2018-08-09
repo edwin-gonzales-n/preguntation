@@ -1,0 +1,27 @@
+.posts-bg{
+
+    /* Full height */
+    height: 100%;
+    /* The image used */
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+}
+
+/*.posts-Transparency {*/
+/*height: 100%;*/
+/*background: rgb(204, 204, 204); !* Fallback for older browsers without RGBA-support *!*/
+/*background: rgba(204, 204, 204, 0.3);*/
+/*}*/
+
+.article-justify{
+    text-align: justify-all;
+    /*text-justify: auto;*/
+    width: 10%;
+}
+
+footer {
+    display: block;
+}
+

@@ -1,6 +1,5 @@
 package com.preguntation;
 
-
 import com.preguntation.services.UserDetailsLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

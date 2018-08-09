@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8" name="viewport"
+          content="width=device-width, intial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title th:text="${title}"></title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{img/fabicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <!--<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet"/>-->
+    <!--<script src='https://www.google.com/recaptcha/api.js'></script>-->
+</head>
+<body>
+
+<th:block th:fragment="navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-tr-dark w-100 mb-3">
+        <a th:href="@{/}" class="navbar-brand">Preguntation</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav" id="registerDrop">
+                <li class="nav-item"><a th:href="@{/events}" class="nav-link">Events</a></li>
+                <li class="nav-item"><a th:href="@{/about}" class="nav-link">About Us</a></li>
+                <th:block sec:authorize="!isAuthenticated()">
+                    <li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#registerModal">Register</a>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link" data-toggle="modal"
+                                            data-target="#loginModal">Login</a></li>
+                </th:block>
+
+                <th:block sec:authorize="isAuthenticated()">
+                    <li class="nav-item"><a th:href="@{/profile}" class="nav-link">Profile</a></li>
+                    <li class="nav-item"><a th:href="@{/logout}" class="nav-link">Logout</a></li>
+                </th:block>
+            </ul>
+        </div>
+    </nav>
+    <!--LOGIN MODAL-->
+    <div id="loginModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <form id="loginForm" th:action="@{/}" th:method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Email" class="form-control"
+                                   th:required="required"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password" placeholder="Password" class="form-control"
+                                   th:required="required"/>
+                        </div>
+                        <small th:if="${param.error}" class="form-text text-danger">Invalid Login</small>
+                        <a class="text-primary form-control-plaintext mb-2" th:href="@{/reset-password}">Forgot
+                            Password?</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary mx-auto">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--REGISTER MODAL-->
+    <div id="registerModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Register</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <form th:action="@{/register}" th:method="POST" th:if="${user}" th:object="${user}">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" id="username" name="username" placeholder="username"
+                                   class="form-control"
+                                   th:field="*{username}" th:required="required"/>
+                            <small class="form-text text-muted">
+                                Please Provide a username
+                            </small>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors()}"
+                                   th:errors="*{username}"></small>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="email" name="email" placeholder="Email" class="form-control"
+                                   th:field="*{email}" th:required="required"/>
+                            <small class="form-text text-muted">Please Provide Your Email</small>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors()}"
+                                   th:errors="*{email}"></small>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="password" name="password" placeholder="Password"
+                                   class="form-control"
+                                   th:field="*{password}" th:required="required"/>
+                            <small class="form-text text-muted">Password Should Be At Least 4 Characters</small>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors()}"
+                                   th:errors="*{password}"></small>
+                        </div>
+                        <div class="form-group" style="width: 50%; display: inline-grid">
+                            <!--recaptcha site key below for localhost use-->
+                            <div id="recaptcha" class="align-content-center g-recaptcha" data-theme="dark"
+                                 data-sitekey="6Leq0lYUAAAAADnxWDPdAT1g3FznT25yVZN8viFK"></div>
+
+                            <!--recaptcha site key below for production use-->
+                            <!--<div id="recaptcha" class="g-recaptcha" data-theme="light" data-sitekey="6Ld0gVgUAAAAAIzQmHR_q-Hag9ncqzYF3c3HWnEW"></div>-->
+                        </div>
+                        <div id="responseHandler"></div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"
+                               th:required="required"/>
+                        <button class="btn btn-primary mx-auto">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>
+<!--</nav>-->
+
+<!--SCRIPTS-->
+<div th:fragment="scripts">
+    <script th:src="@{/js/jquery-2.2.4.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:inline="javascript">
+        $(function () {
+            /*<![CDATA[*/
+            var error = /*[[${param.error}]]*/ null;
+            if(error != null)
+                $('#loginModal').modal('toggle');
+            /*]]>*/
+        });
+
+        //For production please change this
+        // var error_recaptcha = "https://theeventaid.com/?recaptcha_error";
+        var error_recaptcha = "http://localhost:8080/?recaptcha_error";
+        if (window.location.href == error_recaptcha) {
+            $('#registerDrop li a:eq(2)').trigger('click');
+            $('#responseHandler').append('<a style="color: red">Please Click The Captcha!</a>');
+        }
+    </script>
+</div>
+
+</body>
+</html>

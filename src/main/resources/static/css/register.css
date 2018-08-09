@@ -1,0 +1,26 @@
+.register-bg{
+    /* The image used */
+    /*background-image:;*/
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.registration-Transparency {
+    padding:20px;
+    width:500px;
+    background: rgb(204, 204, 204); /* Fallback for older browsers without RGBA-support */
+    background: rgba(204, 204, 204, 0.5);
+}
+
+.input-xlarge{
+    width:300px;
+}
+.center{
+    text-align: center;
+}
