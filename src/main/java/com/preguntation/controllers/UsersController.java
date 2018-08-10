@@ -71,9 +71,4 @@ public class UsersController {
         usersRepository.save(existingUser);
         return "redirect:/ ";
     }
-
-
-
-
-
 }

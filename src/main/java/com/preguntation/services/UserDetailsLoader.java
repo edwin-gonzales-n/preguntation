@@ -18,12 +18,12 @@ public class UserDetailsLoader implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        user username = users.findByEmail(email);
-        if (username == null) {
-            throw new UsernameNotFoundException(String.format("User '%s' not found!", email));
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        user user =  users.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException(String.format("User '%s' not found!", username));
         }
-        return new UserWithRoles(username);
+        return new UserWithRoles(user);
     }
 }
 

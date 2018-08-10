@@ -22,8 +22,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav" id="registerDrop">
-                <li class="nav-item"><a th:href="@{/events}" class="nav-link">Events</a></li>
-                <li class="nav-item"><a th:href="@{/about}" class="nav-link">About Us</a></li>
+                <!--<li class="nav-item"><a th:href="@{/events}" class="nav-link">Events</a></li>-->
+                <!--<li class="nav-item"><a th:href="@{/about}" class="nav-link">About Us</a></li>-->
                 <th:block sec:authorize="!isAuthenticated()">
                     <li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#registerModal">Register</a>
                     </li>
@@ -51,7 +51,7 @@
                 <form id="loginForm" th:action="@{/}" th:method="POST">
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="email" name="email" placeholder="Email" class="form-control"
+                            <input type="username" name="username" placeholder="Username" class="form-control"
                                    th:required="required"/>
                         </div>
                         <div class="form-group">
