@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="partials/navbar :: head('Trivia')">
+    <script>
+        $('body').on('hidden', function () {
+            $(this).removeData('modal-content');
+        });
+    </script>
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+
+<!--<h1>Buena suerte!</h1>-->
+
+<div class="container">
+    <p class="lead">Buena Suerte</p>
+    <div class="row d-flex justify-content-center">
+        <th:block th:each="question : ${questions}">
+            <div class="col-sm-12 col-lg-6 col-xl-4 d-flex flex-column">
+                <div class="card h-100">
+                    <h3 class="card-title" th:text="${question.question}"></h3>
+                    <!--<div class="card-body">-->
+                        <!--<h5 class="card-title" th:text="${event.name}"></h5>-->
+                        <!--<h5 class="card-title" th:each="artist : ${event.artists}" th:text="${artist.name}"></h5>-->
+                        <!--<h6 class="card-subtitle mb-2 text-muted"-->
+                            <!--th:text="${event.start_date.toLocaleString()} + ' @ ' + ${event.location}"></h6>-->
+                        <!--<h6 class="card-subtitle mb-2 text-muted"-->
+                            <!--th:text="'Tickets: $' + ${event.tickets_price} + ' / ' + ${event.tickets_available} + ' left!'"></h6>-->
+                        <!--<br/>-->
+                    <!--</div>-->
+                    <div class="card-footer">
+                        <a class="btn btn-outline-primary d-block" role="button"
+                           th:href="@{/trivia}">Next</a>
+                    </div>
+                </div>
+            </div>
+        </th:block>
+    </div>
+</div>
+
+<script th:replace="partials/navbar :: scripts"></script>
+<script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
+<script th:inline="javascript">
+    JsBarcode(".barcode").init();
+
+</script>
+</body>
+</html>
