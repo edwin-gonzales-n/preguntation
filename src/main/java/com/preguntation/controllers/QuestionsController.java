@@ -32,6 +32,7 @@ public class QuestionsController {
     @GetMapping("/trivia")
     public String getQuestion(Model model) {
         long randomId = (long)(Math.random()*(8+1));
+        System.out.println("randomId = " + randomId);
         question questions = questionsRepository.findOne(randomId);
         model.addAttribute("questions", questions);
         List<answer> answers = answersRepository.findAllByQuestion_ID(randomId);
@@ -40,7 +41,7 @@ public class QuestionsController {
     }
 
     @PostMapping("/triviaSubmit")
-    public ResponseEntity<String> getAnswer(Model model,
+    public String getAnswer(Model model,
                                             @RequestParam(value = "id") String answer_id,
                                             @RequestParam(value = "correct_answer_id") String correct_answer_id) {
 
@@ -52,11 +53,12 @@ public class QuestionsController {
             String message = "Yes, that is the correct answer!";
             model.addAttribute("correct_answer", message);
 
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>("OK", headers, HttpStatus.OK);
-//            return "redirect:/trivia";
+//            HttpHeaders headers = new HttpHeaders();
+//            return new ResponseEntity<>("OK", headers, HttpStatus.OK);
+            return "redirect:/trivia";
         }
-        HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<>(headers,HttpStatus.FOUND);
+//        HttpHeaders headers = new HttpHeaders();
+//        return new ResponseEntity<>(headers,HttpStatus.FOUND);
+        return "redirect:/trivia";
     }
 }
