@@ -48,9 +48,24 @@
     JsBarcode(".barcode").init();
 </script>
 <script>
-    function submitOnClick() {
-        document.getElementById("submitAnswer").submit();
-    }
+    // document.getElementById("answer_click").onclick = function(e){
+    //     // e.preventDefault();
+    //     console.log("this is a test");
+    //
+    //     fetch('/triviaSubmit').then(function (response) {
+    //         if(response.status === 200)
+    //             setInterval(function () {
+    //                 alert("it works!");
+    //             },1000).then(window.location.reload())
+    //         else alert("You got it wrong!").then(window.location.reload())
+    //     });
+    // }
+
+    // SINCE THE CORRECT ANSWER ID AND THE QUESTIONS IDS ARE BEING SENT TO THE FRONTEND,
+    // YOU CAN SIMPLY USE JS TO COMPARE THESE VALUES AND ALERT THE USER WITHOUT USING THE BACKEND
+
+
+
 </script>
 </body>
 </html>

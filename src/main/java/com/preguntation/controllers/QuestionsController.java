@@ -6,6 +6,9 @@ import com.preguntation.repositories.AnswersRepository;
 import com.preguntation.repositories.QuestionsRepository;
 import com.preguntation.repositories.RankingRepository;
 import com.preguntation.repositories.UsersRepository;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,9 +40,10 @@ public class QuestionsController {
     }
 
     @PostMapping("/triviaSubmit")
-    public String getAnswer(Model model,
-                            @RequestParam(value = "id") String answer_id,
-                            @RequestParam(value = "correct_answer_id") String correct_answer_id) {
+    public ResponseEntity<String> getAnswer(Model model,
+                                            @RequestParam(value = "id") String answer_id,
+                                            @RequestParam(value = "correct_answer_id") String correct_answer_id) {
+
         System.out.println("The user's answer is: " + answer_id);
         System.out.println("The correct answer is: " + correct_answer_id);
 
@@ -47,12 +51,12 @@ public class QuestionsController {
             System.out.println("That is the correct answer!");
             String message = "Yes, that is the correct answer!";
             model.addAttribute("correct_answer", message);
-            return "redirect:/trivia";
-        } else{
-            System.out.println("Nope, that is the wrong answer!");
-            String wrong = "Nope!";
-            model.addAttribute("wrong_answer", wrong);
-            return "redirect:/trivia";
+
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>("OK", headers, HttpStatus.OK);
+//            return "redirect:/trivia";
         }
+        HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<>(headers,HttpStatus.FOUND);
     }
 }
