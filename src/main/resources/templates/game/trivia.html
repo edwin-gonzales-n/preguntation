@@ -11,8 +11,6 @@
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
 
-<!--<h1>Buena suerte!</h1>-->
-
 <div class="container">
     <!--<p class="lead">Buena Suerte</p>-->
     <form name="myForm" id="submitAnswer" th:action="@{/triviaSubmit}" th:method="POST">
@@ -25,14 +23,17 @@
                             <input type="text" th:id="correct_answer_id" th:name="correct_answer_id" th:value="${question.correct_answer}"/>
                         </div>
                         <th:block th:each="answer: ${answers}">
-                            <div class="card-body">
-                                <div id="picUrl" style="display: none">
-                                    <input type="text" th:id="id" th:name="id" th:value="${answer.id}"/>
+                            <div class="card-body btn-group btn-group-toggle" data-toggle="buttons">
+                                <div style="display: none">
+                                    <input type="text" th:value="${answer.id}"/>
                                 </div>
-                                <a onclick="document.myForm.submit()" id="answer_click" class="btn btn-outline-primary d-block" th:text="${answer.answer}"></a>
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="id" autocomplete="off" th:text="${answer.answer}"/>
+                                </label>
                             </div>
                         </th:block>
                         <div class="card-footer">
+                            <a onclick="document.myForm.submit()" id="answer_click" class="btn btn-outline-primary d-block">Submit</a>
                             <h5 class="card-title" th:text="${correct_answer}"></h5>
                             <h5 class="card-title" th:text="${wrong_answer}"></h5>
                         </div>

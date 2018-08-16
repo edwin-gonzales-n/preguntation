@@ -8,10 +8,7 @@ import com.preguntation.repositories.RankingRepository;
 import com.preguntation.repositories.UsersRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,10 +38,16 @@ public class QuestionsController {
 
     @PostMapping("/triviaSubmit")
     public String getAnswer(Model model,
+                            @ModelAttribute answer ans,
                             @RequestParam(value = "id") String answer_id,
                             @RequestParam(value = "correct_answer_id") String correct_answer_id) {
         System.out.println("The user's answer is: " + answer_id);
         System.out.println("The correct answer is: " + correct_answer_id);
+
+        if(ans.getAnswer().equals(correct_answer_id)){
+            System.out.println(ans.getAnswer());
+            System.out.println("the model attribute answer answer is equal to the correct answer id.");
+        }
 
         if(answer_id.equals(correct_answer_id)){
             String message = "Yes, that is the correct answer!";
