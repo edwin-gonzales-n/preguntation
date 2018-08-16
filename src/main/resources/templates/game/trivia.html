@@ -12,7 +12,7 @@
 <nav th:replace="partials/navbar :: navbar"></nav>
 
 <div class="container">
-    <!--<p class="lead">Buena Suerte</p>-->
+
     <form name="myForm" id="submitAnswer" th:action="@{/triviaSubmit}" th:method="POST">
         <div class="row d-flex justify-content-center">
             <th:block th:each="question : ${questions}">
@@ -24,16 +24,13 @@
                         </div>
                         <th:block th:each="answer: ${answers}">
                             <div class="card-body btn-group btn-group-toggle" data-toggle="buttons">
-                                <div style="display: none">
-                                    <input type="text" th:value="${answer.id}"/>
-                                </div>
-                                <label class="btn btn-secondary">
-                                    <input type="radio" name="id" autocomplete="off" th:text="${answer.answer}"/>
+                                <label class="btn btn-outline-primary d-inline-block container">
+                                    <input type="radio" name="id" th:value="${answer.id}" autocomplete="off" th:text="${answer.answer}"/>
                                 </label>
                             </div>
                         </th:block>
                         <div class="card-footer">
-                            <a onclick="document.myForm.submit()" id="answer_click" class="btn btn-outline-primary d-block">Submit</a>
+                            <a onclick="document.myForm.submit()" id="answer_click" class="btn btn-warning d-block">Submit</a>
                             <h5 class="card-title" th:text="${correct_answer}"></h5>
                             <h5 class="card-title" th:text="${wrong_answer}"></h5>
                         </div>
@@ -42,6 +39,7 @@
             </th:block>
         </div>
     </form>
+
 </div>
 
 <script th:replace="partials/navbar :: scripts"></script>

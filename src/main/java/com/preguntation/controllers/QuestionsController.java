@@ -38,22 +38,18 @@ public class QuestionsController {
 
     @PostMapping("/triviaSubmit")
     public String getAnswer(Model model,
-                            @ModelAttribute answer ans,
                             @RequestParam(value = "id") String answer_id,
                             @RequestParam(value = "correct_answer_id") String correct_answer_id) {
         System.out.println("The user's answer is: " + answer_id);
         System.out.println("The correct answer is: " + correct_answer_id);
 
-        if(ans.getAnswer().equals(correct_answer_id)){
-            System.out.println(ans.getAnswer());
-            System.out.println("the model attribute answer answer is equal to the correct answer id.");
-        }
-
         if(answer_id.equals(correct_answer_id)){
+            System.out.println("That is the correct answer!");
             String message = "Yes, that is the correct answer!";
             model.addAttribute("correct_answer", message);
             return "redirect:/trivia";
         } else{
+            System.out.println("Nope, that is the wrong answer!");
             String wrong = "Nope!";
             model.addAttribute("wrong_answer", wrong);
             return "redirect:/trivia";
