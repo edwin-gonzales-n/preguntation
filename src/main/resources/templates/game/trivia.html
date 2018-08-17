@@ -27,17 +27,34 @@
                                 <label th:onclick="|answerCheck('${question.correct_answer}', '${answer.id}')|"  class="btn btn-outline-primary d-inline-block container">
                                     <input type="radio" name="id" th:value="${answer.id}" autocomplete="off" th:text="${answer.answer}"/>
                                 </label>
-                                <!--th:onclick="|upload('${command['class'].simpleName}', '${gallery}')|"-->
                             </div>
                         </th:block>
-                        <div class="card-footer">
-                            <a onclick="document.myForm.submit()" id="answer_click" class="btn btn-warning d-block">Siguiente</a>
-                        </div>
+                        <!--<div class="card-footer">-->
+                            <!--<a onclick="document.myForm.submit()" id="answer_click" class="btn btn-warning d-block">Siguiente</a>-->
+                        <!--</div>-->
                     </div>
                 </div>
             </th:block>
         </div>
     </form>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="alert" class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <a onclick="document.myForm.submit()" class="btn btn-warning d-block">Siguiente</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
@@ -51,9 +68,12 @@
         console.log(correct_answer);
         console.log(provided_answer);
         if(correct_answer === provided_answer){
-            alert("Perfecto!")
+            // alert("Perfecto!")
+            $('#exampleModal').modal('show');
+            $('#alert').append('<h4> Muy bien!  </h4>');
         } else{
-            alert("Te equivocaste!")
+            $('#exampleModal').modal('show');
+            $('#alert').append('<h4> Te equivocaste!  </h4>');
         }
     }
 </script>

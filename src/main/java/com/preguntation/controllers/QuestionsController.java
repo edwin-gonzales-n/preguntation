@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class QuestionsController {
@@ -31,11 +31,25 @@ public class QuestionsController {
 
     @GetMapping("/trivia")
     public String getQuestion(Model model) {
-        long randomId = (long)(Math.random()*8+1);
-        System.out.println("randomId = " + randomId);
-        question questions = questionsRepository.findOne(randomId);
+
+        long count = questionsRepository.count();
+        System.out.println("The table count is: " + count);
+
+        List numbers = new ArrayList();
+        long i = 1;
+        while(i <= count){
+            System.out.println("value of i is: " + i);
+            numbers.add(i);
+            i++;
+        }
+
+        System.out.println(numbers);
+
+        long random = new Random().nextInt(7)+1;
+        System.out.println("randomId = " + random);
+        question questions = questionsRepository.findOne(random);
         model.addAttribute("questions", questions);
-        List<answer> answers = answersRepository.findAllByQuestion_ID(randomId);
+        List<answer> answers = answersRepository.findAllByQuestion_ID(random);
         model.addAttribute("answers", answers);
         return "game/trivia";
     }
