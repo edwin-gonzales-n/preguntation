@@ -50,7 +50,7 @@
                 <div id="alert" class="modal-body">
                 </div>
                 <div class="modal-footer">
-                    <a onclick="document.myForm.submit()" class="btn btn-warning d-block">Siguiente</a>
+                    <a style="align-content: center" onclick="document.myForm.submit()" class="btn btn-warning d-block">Siguiente</a>
                 </div>
             </div>
         </div>
@@ -68,14 +68,22 @@
         console.log(correct_answer);
         console.log(provided_answer);
         if(correct_answer === provided_answer){
-            // alert("Perfecto!")
             $('#exampleModal').modal('show');
             $('#alert').append('<h4> Muy bien!  </h4>');
         } else{
             $('#exampleModal').modal('show');
-            $('#alert').append('<h4> Te equivocaste!  </h4>');
+            $('#alert').append('<h4> Te equivocaste! </h4>');
         }
     }
+
+    $.ajax("/trivia").done(function(data, status, jqXhr) {
+        alert("AJAX call completed successfully!");
+        console.log("Request status: " + status);
+        console.log("Data returned from server:");
+        console.log(data);
+    });
+
+
 </script>
 </body>
 </html>

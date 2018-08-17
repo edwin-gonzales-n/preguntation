@@ -6,9 +6,6 @@ import com.preguntation.repositories.AnswersRepository;
 import com.preguntation.repositories.QuestionsRepository;
 import com.preguntation.repositories.RankingRepository;
 import com.preguntation.repositories.UsersRepository;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +32,7 @@ public class QuestionsController {
         long count = questionsRepository.count();
         System.out.println("The table count is: " + count);
 
+        //  creating array list to store each number id of the total count of the questions table.
         List numbers = new ArrayList();
         long i = 1;
         while(i <= count){
@@ -43,14 +41,19 @@ public class QuestionsController {
             i++;
         }
 
-        System.out.println(numbers);
+        //created this logic to attempt to send to frontend just one question in order.
+        List<question> roles = new ArrayList<>();
+        questionsRepository.findAll().forEach(roles::add);
+        System.out.println("This is the output of roles" + roles);
+        //
 
-        long random = new Random().nextInt(7)+1;
+        long random = new Random().nextInt(((int)count - 1))+1;
         System.out.println("randomId = " + random);
         question questions = questionsRepository.findOne(random);
         model.addAttribute("questions", questions);
         List<answer> answers = answersRepository.findAllByQuestion_ID(random);
         model.addAttribute("answers", answers);
+
         return "game/trivia";
     }
 
@@ -66,13 +69,8 @@ public class QuestionsController {
             System.out.println("That is the correct answer!");
             String message = "Yes, that is the correct answer!";
             model.addAttribute("correct_answer", message);
-
-//            HttpHeaders headers = new HttpHeaders();
-//            return new ResponseEntity<>("OK", headers, HttpStatus.OK);
             return "redirect:/trivia";
         }
-//        HttpHeaders headers = new HttpHeaders();
-//        return new ResponseEntity<>(headers,HttpStatus.FOUND);
         return "redirect:/trivia";
     }
 }
