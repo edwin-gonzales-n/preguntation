@@ -31,7 +31,7 @@ public class QuestionsController {
 
     @GetMapping("/trivia")
     public String getQuestion(Model model) {
-        long randomId = (long)(Math.random()*(8+1));
+        long randomId = (long)(Math.random()*8+1);
         System.out.println("randomId = " + randomId);
         question questions = questionsRepository.findOne(randomId);
         model.addAttribute("questions", questions);

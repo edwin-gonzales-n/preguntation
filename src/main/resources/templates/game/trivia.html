@@ -24,13 +24,14 @@
                         </div>
                         <th:block th:each="answer: ${answers}">
                             <div id="questions" class="questions card-body btn-group btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-outline-primary d-inline-block container">
+                                <label th:onclick="|answerCheck('${question.correct_answer}', '${answer.id}')|"  class="btn btn-outline-primary d-inline-block container">
                                     <input type="radio" name="id" th:value="${answer.id}" autocomplete="off" th:text="${answer.answer}"/>
                                 </label>
+                                <!--th:onclick="|upload('${command['class'].simpleName}', '${gallery}')|"-->
                             </div>
                         </th:block>
                         <div class="card-footer">
-                            <a onclick="document.myForm.submit()" id="answer_click" class="btn btn-warning d-block">Submit</a>
+                            <a onclick="document.myForm.submit()" id="answer_click" class="btn btn-warning d-block">Siguiente</a>
                         </div>
                     </div>
                 </div>
@@ -45,31 +46,16 @@
 <script th:inline="javascript">
     JsBarcode(".barcode").init();
 </script>
-<script th:inline="javascript">
-    // SINCE THE CORRECT ANSWER ID AND THE QUESTIONS IDS ARE BEING SENT TO THE FRONTEND,
-    // YOU CAN SIMPLY USE JS TO COMPARE THESE VALUES AND ALERT THE USER WITHOUT USING THE BACKEND
-
-    /*<![CDATA[*/
-    $('.questions label').click(function(event) {
-        let questions = /*[[${questions}]]*/ 'default';
-        let quest = /*[[${questions.correct_answer}]]*/ 'default';
-        let answers = /*[[${answers}]]*/ 'default';
-        // let userAnswer = /*[[${answers.[].id]]*/ 'default';
-        console.log(questions);
-        console.log("The correct answer id is: " + quest);
-        console.log(answers);
-
-        // let name = $(event.target).closest('label').val();
-        // console.log("The user answer is: ", userAnswer);
-
-        // console.log('Value of question is: '.concat($(this).prev().val(), 'Name of question is: ', $(this).prev().attr('name')));
-
-        // alert("This is a test");
-
-    });
-    /*]]>*/
-
-
+<script>
+    function answerCheck(correct_answer, provided_answer){
+        console.log(correct_answer);
+        console.log(provided_answer);
+        if(correct_answer === provided_answer){
+            alert("Perfecto!")
+        } else{
+            alert("Te equivocaste!")
+        }
+    }
 </script>
 </body>
 </html>
