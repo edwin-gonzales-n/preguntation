@@ -74,3 +74,135 @@ public class QuestionsController {
         return "redirect:/trivia";
     }
 }
+
+// SAMPLE Controller for the question controller to implement ajax calls.
+
+//@RestController
+//18
+//public class TicketEndpoint {
+//19
+//
+//20
+//    @Autowired
+//21
+//    private TicketService ticketService;
+//22
+//
+//23
+//    // --------------------------------------------
+//24
+//    // CRUD OPERATIONS FOR PARENT RECORDS (TICKETS)
+//25
+//
+//26
+//    @PostMapping("/tickets")
+//27
+//    public Ticket createTicket(@RequestBody Ticket ticket) {
+//28
+//        Ticket savedTicket = ticketService.createTicket(ticket);
+//29
+//        return savedTicket;
+//30
+//    }
+//31
+//
+//32
+//    @GetMapping("/tickets")
+//33
+//    public List getAllTickets() {
+//34
+//        return ticketService.findAll();
+//35
+//    }
+//36
+//
+//37
+//    @GetMapping("/tickets/{id}")
+//38
+//    public Ticket getTicket(@PathVariable long id) {
+//39
+//        return ticketService.findTicket(id);
+//40
+//    }
+//41
+//
+//42
+//    @PutMapping("/tickets/{id}")
+//43
+//    public Ticket changeTicket(@PathVariable long id, @RequestBody Ticket ticket) {
+//44
+//        return ticketService.updateTicket(id, ticket);
+//45
+//    }
+//46
+//
+//47
+//    @DeleteMapping("/tickets/{id}")
+//48
+//    public String deleteTicket(@PathVariable long id) {
+//49
+//        ticketService.deleteById(id);
+//50
+//        return String.format("Ticket id #%d successfully deleted", id);
+//51
+//    }
+//52
+//
+//53
+//    // --------------------------------------------
+//54
+//    // CRUD OPERATIONS FOR CHILD RECORDS (COMMENTS)
+//55
+//
+//56
+//    @PostMapping("/tickets/{id}/comments")
+//57
+//    public Ticket createComment(@PathVariable long id, @RequestBody Comment comment) {
+//58
+//        return ticketService.createComment(id, comment);
+//59
+//    }
+//60
+//
+//61
+//    @GetMapping("/tickets/{id}/comments")
+//62
+//    public List getAllComments(@PathVariable long id) {
+//63
+//        return ticketService.findAllComments(id);
+//64
+//    }
+//65
+//
+//66
+//    @GetMapping("/tickets/comments/{id}")
+//67
+//    public Comment getComment(@PathVariable long id) {
+//68
+//        return ticketService.findComment(id);
+//69
+//    }
+//70
+//
+//71
+//    @PutMapping("/tickets/comments/{id}")
+//72
+//    public Comment changeComment(@PathVariable long id, @RequestBody Comment comment) {
+//73
+//        return ticketService.updateComment(id, comment);
+//74
+//    }
+//75
+//
+//76
+//    @DeleteMapping("/tickets/comments/{id}")
+//77
+//    public String deleteComment(@PathVariable long id) {
+//78
+//        ticketService.deleteCommentById(id);
+//79
+//        return String.format("Comment id %d successfully deleted", id);
+//80
+//    }
+//81
+//}

@@ -4,7 +4,6 @@ import com.preguntation.models.question;
 import com.preguntation.repositories.QuestionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
