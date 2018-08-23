@@ -15,15 +15,28 @@ $.get("/triviaAllQuestions",function(questions) {
     console.log(numberOfQuestions);
 });
 
+let i = 0;
 function getQuestion() {
-    for(var i = 1; i < numberOfQuestions.length+1; i++){
+    i+=1;
         $.get('/triviaByQuestion/'+i+'',function (question) {
             console.log(question);
         }).done(function (question) {
+            $('#exampleModal').modal('show');
+            const questionSection = $('#questions');
+            questionsSection.empty()
+                .append((''))
+            $('#questions').empty();
             $('#questions').append('<div class="container">');
             $('#questions').append('<h3>'+question.question+'</h3>');
             $('#questions').append('<a onclick="getQuestion()" class="btn btn-outline btn-outline-primary d-inline-block">Next Question</a>');
             $('#questions').append('</div>');
+
+            if(i === numberOfQuestions.length){
+                $('#questions').append('<div class="container">');
+                $('#questions').append('<h3>FINISH</h3>');
+                $('#questions').append('<a onclick="window.location.reload()" class="btn btn-outline btn-outline-primary d-inline-block">PLAY AGAIN</a>');
+                $('#questions').append('</div>');
+            }
         });
-    }
 }
+
