@@ -45,6 +45,11 @@ public class QuestionsController {
         return questionService.findQuestion(random);
     }
 
+    @GetMapping("/triviaByQuestion/{id}")
+    public question getQuestionById(@PathVariable long id) {
+        return questionService.findQuestion(id);
+    }
+
 //    @GetMapping("/trivia")
 //    public String getQuestion(Model model) {
 //

@@ -25,33 +25,8 @@
 <script th:inline="javascript">
     JsBarcode(".barcode").init();
 </script>
-<script>
-    function ajaxRequest(){
-        $.get("/triviaAllQuestions",function(questions) {
-            console.log('Beginning console log - success', questions);
-            console.log("Length of questions is: "+questions.length);
-        }).done(function(questions){
-            console.log(" This is the done message -- success", questions);
-            // $.each(questions,function (i,question) {
-            //     console.log("this is the each output: " + question.id);
-            //     $('#questions').append('<div class="container">');
-            //     $('#questions').append('<h3>'+question.question+'</h3>');
-            //     $('#questions').append('</div>');
-            // });
-        });
-    }
 
-    function getQuestion() {
-        $.get("/triviaEachQuestion",function (question) {
-            console.log(question);
-        }).done(function (question) {
-            $('#questions').append('<div class="container">');
-            $('#questions').append('<h3>'+question.question+'</h3>');
-            $('#questions').append('<a th:onclick="|getQuestion()|" class="btn btn-outline btn-outline-primary d-inline-block">Next Question</a>');
-            $('#questions').append('</div>');
-        });
-    }
+<script th:src="@{/js/profile.js}"></script>
 
-</script>
 </body>
 </html>
