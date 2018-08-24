@@ -1,22 +1,24 @@
 use preguntation_db;
 
 INSERT INTO questions (question, correct_answer) VALUES
-('En que año estamos?', 3),
-('Nombre del primer presidente del Peru', 6),
+('En que año salio Rocky IV?', 3),
+('Quien escribio "El Cantante"?', 6),
 ('Anotador del primer gol de Peru en un mundial', 9),
 ('Ganador mundial de Sud Africa 2010', 10),
 ('Como se dice coche de bebe en Ingles?', 14),
 ('Como se dice Hola en Aleman?', 18),
 ('Cuántas películas tiene la saga de harry potter', 21),
-('En que año nacio Pedro Suarez Bertiz', 23);
+('En que año nacio Pedro Suarez Bertiz', 23),
+('Como se dice llave en Ingles?', 26),
+('Quien anoto el primer gol de Peru en el mundial 2018?', 28);
 
 INSERT INTO answers (id_question, answer) VALUES
-(1, '2011'),
-(1, '2012'),
-(1, '2018'),
-(2, 'Jose de la riva Aguero'),
-(2, 'Jose Bernardo de Tagle'),
-(2, 'Jose de San Martin'),
+(1, '1990'),
+(1, '1988'),
+(1, '1985'),
+(2, 'Willie Colon'),
+(2, 'Hector Lavoe'),
+(2, 'Ruben Blades'),
 (3, 'Julio Cesar Uribe'),
 (3, 'Teofilo Cubillas'),
 (3, 'Luis de Souza'),
@@ -34,4 +36,10 @@ INSERT INTO answers (id_question, answer) VALUES
 (7, '8'),
 (8, '1968'),
 (8, '1969'),
-(8, '1975');
+(8, '1975'),
+(9, 'Hammer'),
+(9, 'Key'),
+(9, 'Fork'),
+(10, 'Carrillo'),
+(10, 'Guerrero'),
+(10, 'Cueva');
