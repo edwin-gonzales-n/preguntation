@@ -39,15 +39,11 @@ public class QuestionService {
 //    @Autowired
 //45
 //    private CommentRepository commentRepository;
-//46
-//
-//47
+
 //    // --------------------------------------------
 //48
 //    // CRUD OPERATIONS FOR CHILD RECORDS (COMMENTS)
-//49
-//
-//50
+
 //    public Ticket createComment(long ticketId, Comment comment) {
 //51
 //        Ticket ticket = findTicket(ticketId);
@@ -55,31 +51,23 @@ public class QuestionService {
 //        comment.setTicket(ticket);
 //53
 //        ticket.getComments().add(comment);
-//54
-//
-//55
+
 //        return ticketRepository.save(ticket);
 //56
 //    }
-//57
-//
-//58
+
 //    public List findAllComments(long ticketId) {
 //59
 //        return findTicket(ticketId).getComments();
 //60
 //    }
-//61
-//
-//62
+
 //    public Comment findComment(long id) {
 //63
 //        return commentRepository.findOne(id);
 //64
 //    }
-//65
-//
-//66
+
 //    public Comment updateComment(long commentId, Comment comment) {
 //67
 //        Comment savedComment = commentRepository.findOne(commentId);
@@ -91,13 +79,10 @@ public class QuestionService {
 //        return savedComment;
 //71
 //    }
-//72
-//
-//73
+
 //    public void deleteCommentById(long id) {
 //74
 //        commentRepository.delete(id);
 //75
 //    }
-
 }

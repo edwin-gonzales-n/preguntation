@@ -6,7 +6,7 @@ import com.preguntation.repositories.AnswersRepository;
 import com.preguntation.repositories.QuestionsRepository;
 import com.preguntation.repositories.RankingRepository;
 import com.preguntation.repositories.UsersRepository;
-import com.preguntation.services.QuestionService;
+import com.preguntation.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +19,9 @@ public class QuestionsController {
 
     @Autowired
     public QuestionService questionService;
+
+    @Autowired
+    public AnswerService answerService;
 
     public AnswersRepository answersRepository;
     public QuestionsRepository questionsRepository;
@@ -49,6 +52,13 @@ public class QuestionsController {
     public question getQuestionById(@PathVariable long id) {
         return questionService.findQuestion(id);
     }
+
+    @GetMapping("/answersByQuestionID/{id}")
+    public Iterable getAnswers(@PathVariable long id){
+        return answerService.findAnswers(id);
+    }
+
+
 
 //    @GetMapping("/trivia")
 //    public String getQuestion(Model model) {
