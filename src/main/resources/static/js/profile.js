@@ -19,39 +19,59 @@ let i = 0;
 var correct_answer;
 function getQuestion() {
     i+=1;
+    $('#exampleModal').modal('hide');
+
         $.get('/triviaByQuestion/'+i+'',function (question) {
             correct_answer=question.correct_answer;
             console.log(question);
             // $('#exampleModal').modal('show');
-            $('#questions').empty();
-            $('#questions').append('<h3>'+question.question+'</h3>');
 
-            if(i === numberOfQuestions.length){
+            if(i === numberOfQuestions.length+1){
+                $('#questions').empty();
+                $('#answers').empty();
                 $('#questions').append('<div class="container">');
                 $('#questions').append('<h3>FINISH</h3>');
-                $('#questions').append('<a onclick="window.location.reload()" class="btn btn-outline btn-outline-primary d-inline-block">PLAY AGAIN</a>');
+                $('#questions').append('<a onclick="location.reload()" class="btn btn-outline btn-outline-primary d-inline-block">Submit Results</a>');
                 $('#questions').append('</div>');
+            } else{
+                $('#questions').empty();
+                $('#questions').append('<h3>'+question.question+'</h3>');
+
+                $.get('/answersByQuestionID/'+i+'', function(answers){
+                    console.log(answers);
+                    $('#answers').empty();
+                    $.each(answers,function (i,answer) {
+                        $('#answers').append('<label onclick="checkAnswer(correct_answer,'+answer.id+')" class="btn btn-outline-primary d-inline-block container">\n' +
+                            '<input type="radio" name="id" value="'+answer.id+'" autocomplete="off"/>' +answer.answer+'\n' +
+                            '</label>')
+                    })
+                })
             }
 
-            $.get('/answersByQuestionID/'+i+'', function(answers){
-                console.log(answers);
-                $('#answers').empty();
-                $.each(answers,function (i,answer) {
-                    $('#answers').append('<label onclick="checkAnswer(correct_answer,'+answer.id+')" class="btn btn-outline-primary d-inline-block container">\n' +
-                        '<input type="radio" name="id" value="'+answer.id+'" autocomplete="off"/>' +answer.answer+'\n' +
-                        '</label>')
-                })
-            })
         });
 }
 
 function checkAnswer(correct_answer,user_answer){
     if(correct_answer === user_answer){
         console.log("That was the correct answer!");
-        getQuestion();
+        $('#exampleModal').modal('show');
+        $('#alert').empty();
+        $('#alert').append('<h4> Muy bien!  </h4>');
+        // getQuestion();
     } else{
         console.log("That was the wrong answer!");
-        getQuestion();
+        $('#exampleModal').modal('show');
+        $('#alert').empty();
+        $('#alert').append('<h4> No!  </h4>');
+        // getQuestion();
     }
 }
+
+function gameReload(){
+    location.reload();
+    $(function () {
+        getQuestion();
+    });
+}
+
 

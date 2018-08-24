@@ -18,17 +18,16 @@
     <a th:onclick="|getQuestion()|" class="btn btn-outline btn-outline-primary d-inline-block">Play Game</a>
 </div>
 <br/>
-<div class="container">
+<div class="container-fluid">
     <div class="row d-flex justify-content-center">
         <div class="col-sm-12 col-lg-6 col-xl-4 d-flex flex-column">
             <div class="card h-100">
                 <div id="questions"></div>
-                <div id="answers" class="container questions card-body btn-group btn-group-toggle" data-toggle="buttons"></div>
+                <div id="answers" class="container-fluid questions card-body btn-group btn-group-toggle" data-toggle="buttons"></div>
             </div>
         </div>
     </div>
 </div>
-
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -39,8 +38,10 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <div id="alert" class="modal-body">
+            </div>
             <div class="modal-footer">
-                <a style="align-content: center" onclick="document.myForm.submit()" class="btn btn-warning d-block">Siguiente</a>
+                <a style="align-content: center" onclick="getQuestion()" class="btn btn-warning d-block">Siguiente</a>
             </div>
         </div>
     </div>
