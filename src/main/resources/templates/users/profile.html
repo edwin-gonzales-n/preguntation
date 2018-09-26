@@ -11,13 +11,13 @@
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
 
-<h1>This is your profile page</h1>
+<h1>Let's play!</h1>
 
-<div>
-    <!--<a th:href="@{/trivia}" class="btn btn-outline btn-outline-primary d-inline-block">Play Game</a>-->
-    <a th:onclick="|getQuestion()|" class="btn btn-outline btn-outline-primary d-inline-block">Play Game</a>
-    <a onclick="getEnglishQuestions()" class="btn btn-outline btn-outline-primary d-inline-block">English Questions</a>
+<div id="hideMe">
+    <a onclick="getQuestions(1)" class="btn btn-outline btn-outline-primary d-inline-block">Spanish</a>
+    <a onclick="getQuestions(2)" class="btn btn-outline btn-outline-primary d-inline-block">English</a>
 </div>
+
 <br/>
 <div class="container-fluid">
     <div class="row d-flex justify-content-center">
@@ -41,8 +41,7 @@
             </div>
             <div id="alert" class="modal-body">
             </div>
-            <div class="modal-footer">
-                <a style="align-content: center" onclick="getQuestion()" class="btn btn-warning d-block">Next</a>
+            <div id="nextQuestion" class="modal-footer">
             </div>
         </div>
     </div>

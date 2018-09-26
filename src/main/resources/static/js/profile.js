@@ -17,56 +17,23 @@ $.get("/triviaAllQuestions",function(questions) {
 
 let i = 0;
 var correct_answer;
-function getQuestion() {
-    i+=1;
+
+function getQuestions(languageID) {
+    $('#hideMe').hide();
     $('#exampleModal').modal('hide');
-
-        $.get('/triviaByQuestion/'+i+'',function (question) {
-            correct_answer=question.correct_answer;
-            console.log(question);
-            // $('#exampleModal').modal('show');
-
-            if(i === numberOfQuestions.length+1){
-                $('#questions').empty();
-                $('#answers').empty();
-                $('#questions').append('<div class="container">');
-                $('#questions').append('<h3>FINISH</h3>');
-                $('#questions').append('<a onclick="location.reload()" class="btn btn-outline btn-outline-primary d-inline-block">Submit Results</a>');
-                $('#questions').append('</div>');
-            } else{
-                $('#questions').empty();
-                $('#questions').append('<h3>'+question.question+'</h3>');
-
-                $.get('/answersByQuestionID/'+i+'', function(answers){
-                    console.log(answers);
-                    $('#answers').empty();
-                    $.each(answers,function (i,answer) {
-                        $('#answers').append('<label onclick="checkAnswer(correct_answer,'+answer.id+')" class="btn btn-outline-primary d-inline-block container">\n' +
-                            '<input type="radio" name="id" value="'+answer.id+'" autocomplete="off"/>' +answer.answer+'\n' +
-                            '</label>')
-                    })
-                })
-            }
-
-        });
-}
-
-function getEnglishQuestions() {
-    let id = 2;
-    $.get('/triviaQuestionsByLanguage/'+id+'', function (question) {
+    $.get('/triviaQuestionsByLanguage/'+languageID+'', function (question) {
         let questions_array = question;
         console.log(questions_array);
 
         if(i === questions_array.length){
             $('#questions').empty();
             $('#answers').empty();
-            $('#questions').append('<div class="container">');
-            $('#questions').append('<h3>FINISH</h3>');
-            $('#questions').append('<a onclick="location.reload()" class="btn btn-outline btn-outline-primary d-inline-block">Submit Results</a>');
-            $('#questions').append('</div>');
+            $('#questions').append('<div class="container"><h3>FINISH</h3><a onclick="location.reload()" class="btn btn-outline btn-outline-primary d-inline-block">Submit Results</a></div>');
         } else{
             $('#questions').empty();
             $('#questions').append('<h3>'+question[i].question+'</h3>');
+            $('#nextQuestion').empty();
+            $('#nextQuestion').append('<a style="align-content: center" onclick="getQuestions('+question[i].language_id+')" class="btn btn-warning d-block">Next</a>');
             correct_answer=question[i].correct_answer;
 
             $.get('/answersByQuestionID/'+question[i++].id+'', function(answers){
@@ -79,7 +46,6 @@ function getEnglishQuestions() {
                 })
             })
         }
-
     });
 }
 
@@ -89,13 +55,11 @@ function checkAnswer(correct_answer,user_answer){
         $('#exampleModal').modal('show');
         $('#alert').empty();
         $('#alert').append('<h4> Yes!  </h4>');
-        // getQuestion();
     } else{
         console.log("That was the wrong answer!");
         $('#exampleModal').modal('show');
         $('#alert').empty();
         $('#alert').append('<h4> No!  </h4>');
-        // getQuestion();
     }
 }
 
