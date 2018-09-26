@@ -13,4 +13,8 @@ public interface QuestionsRepository extends CrudRepository<question, Long> {
 
     @Query(nativeQuery =true, value = "SELECT count(u) from questions u")
     int findCount();
+
+    @Query(nativeQuery =true, value = "SELECT * from questions WHERE language_id = ?1")
+    Iterable<question> findAllByLanguage(long id);
+
 }

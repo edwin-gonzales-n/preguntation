@@ -16,6 +16,7 @@
 <div>
     <!--<a th:href="@{/trivia}" class="btn btn-outline btn-outline-primary d-inline-block">Play Game</a>-->
     <a th:onclick="|getQuestion()|" class="btn btn-outline btn-outline-primary d-inline-block">Play Game</a>
+    <a onclick="getEnglishQuestions()" class="btn btn-outline btn-outline-primary d-inline-block">English Questions</a>
 </div>
 <br/>
 <div class="container-fluid">
@@ -41,7 +42,7 @@
             <div id="alert" class="modal-body">
             </div>
             <div class="modal-footer">
-                <a style="align-content: center" onclick="getQuestion()" class="btn btn-warning d-block">Siguiente</a>
+                <a style="align-content: center" onclick="getQuestion()" class="btn btn-warning d-block">Next</a>
             </div>
         </div>
     </div>

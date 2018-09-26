@@ -24,6 +24,10 @@ public class QuestionService {
         return questionsRepository.findOne(id);
     }
 
+    public Iterable<question> findQuestionByLanguage (long languageID){
+        return questionsRepository.findAllByLanguage(languageID);
+    }
+
     public question updateQuestion(long id, question question){
         question updateQuestion = findQuestion(id);
         if(!question.getQuestion().equals(updateQuestion.getQuestion())){

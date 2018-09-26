@@ -58,7 +58,10 @@ public class QuestionsController {
         return answerService.findAnswers(id);
     }
 
-
+    @GetMapping("/triviaQuestionsByLanguage/{id}")
+    public Iterable<question> getQuestionsByLanguage(@PathVariable long id) {
+        return questionService.findQuestionByLanguage(id);
+    }
 
 //    @GetMapping("/trivia")
 //    public String getQuestion(Model model) {

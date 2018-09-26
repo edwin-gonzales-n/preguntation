@@ -20,22 +20,36 @@ public class question {
     @Column(nullable = false)
     private long correct_answer;
 
+    @NotBlank(message = "Must have language id")
+    @Column(nullable = false)
+    private long language_id;
+
     public question(){}
 
     //insert into db
-    public question(String question, long correct_answer) {
+    public question(String question, long correct_answer, long language_id) {
         this.question = question;
         this.correct_answer = correct_answer;
+        this.language_id = language_id;
     }
 
     //pull from db
-    public question(long id,String question, long correct_answer) {
+    public question(long id,String question, long correct_answer, long language_id) {
         this.id = id;
         this.question = question;
         this.correct_answer = correct_answer;
+        this.language_id = language_id;
     }
 
     //setters and getters
+
+    public long getLanguage_id() {
+        return language_id;
+    }
+
+    public void setLanguage_id(long language_id) {
+        this.language_id = language_id;
+    }
 
     public long getId() {
         return id;
