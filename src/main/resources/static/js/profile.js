@@ -16,8 +16,8 @@ $.get("/triviaAllQuestions",function(questions) {
 });
 
 let i = 0;
-var correct_answer;
-
+let answerCounter = [];
+let correct_answer;
 function getQuestions(languageID) {
     $('#hideMe').hide();
     $('#exampleModal').modal('hide');
@@ -29,6 +29,8 @@ function getQuestions(languageID) {
             $('#questions').empty();
             $('#answers').empty();
             $('#questions').append('<div class="container"><h3>FINISH</h3><a onclick="location.reload()" class="btn btn-outline btn-outline-primary d-inline-block">Submit Results</a></div>');
+            $('#questions').append('<br><h3>Results : '+answerCounter.length+' out of '+questions_array.length+'</h3>');
+            $('#questions').append('<h3>Grade : '+((answerCounter.length)*100/(questions_array.length))+'</h3>');
         } else{
             $('#questions').empty();
             $('#questions').append('<h3>'+question[i].question+'</h3>');
@@ -54,12 +56,13 @@ function checkAnswer(correct_answer,user_answer){
         console.log("That was the correct answer!");
         $('#exampleModal').modal('show');
         $('#alert').empty();
-        $('#alert').append('<h4> Yes!  </h4>');
+        $('#alert').append('<h4> Right!  </h4>');
+        answerCounter.push("1");
     } else{
         console.log("That was the wrong answer!");
         $('#exampleModal').modal('show');
         $('#alert').empty();
-        $('#alert').append('<h4> No!  </h4>');
+        $('#alert').append('<h4> Wrong!  </h4>');
     }
 }
 
